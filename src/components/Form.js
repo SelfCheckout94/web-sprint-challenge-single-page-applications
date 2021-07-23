@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Form(props) {
-  const { values, handleChange, handleSubmit } = props;
+  const { values, handleChange, handleSubmit, errors } = props;
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
     const valueToUse = type === "checkbox" ? checked : value;
@@ -18,6 +18,7 @@ export default function Form(props) {
       <h2>Pizza Maker</h2>
       <div>
         <h3>Input your name</h3>
+        <div>{errors.name}</div>
         <input
           id="name-input"
           name="name"

@@ -80,6 +80,7 @@ const App = () => {
             values={formValues}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
+            errors={formErrors}
           />
         </Route>
       </Switch>
