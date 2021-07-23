@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Form(props) {
-  const { values, disabled, handleChange, handleSubmit } = props;
+  const { values, handleChange, handleSubmit } = props;
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
     const valueToUse = type === "checkbox" ? checked : value;

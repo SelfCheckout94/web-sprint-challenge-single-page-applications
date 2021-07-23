@@ -3,12 +3,14 @@ import React, { useState } from "react";
 
 import Form from "./components/Form";
 import axios from "axios";
+import { reach } from "yup";
+import schema from "./validation/formSchema";
 
 const initialFormValues = {
   name: "",
   size: "",
   sauce: "",
-  pepproni: false,
+  pepperoni: false,
   sausage: false,
   bacon: false,
   spicySausage: false,
@@ -16,31 +18,35 @@ const initialFormValues = {
   special: "",
 };
 
+const initialFormErrors = {
+  name: "",
+};
+
 const initialOrders = [];
-const initialDisabled = true;
 const App = () => {
   const [formValues, setFormValues] = useState(initialFormValues);
   const [orders, setOrders] = useState(initialOrders);
-  const [disabled, setDisabled] = useState(initialDisabled);
-
-  const getOrders = () => {
-    axios.get("https://reqres.in/api/orders").then((res) => {
-      setOrders(res.data);
-    });
-  };
+  const [formErrors, setFormErrors] = useState(initialFormErrors);
 
   const postNewOrder = (newOrder) => {
     axios
       .post("https://reqres.in/api/orders", newOrder)
       .then((res) => {
         setOrders([res.data, ...orders]);
-        console.log(orders);
       })
       .catch((err) => console.error(err))
       .finally(setFormValues(initialFormValues));
   };
 
+  const validate = (name, value) => {
+    reach(schema, name)
+      .validate(value)
+      .then(() => setFormErrors({ ...formErrors, [name]: "" }))
+      .catch((err) => setFormErrors({ ...formErrors, [name]: err.errors[0] }));
+  };
+
   const handleChange = (name, value) => {
+    validate(name, value);
     setFormValues({ ...formValues, [name]: value });
   };
 
@@ -72,7 +78,6 @@ const App = () => {
         <Route path="/pizza">
           <Form
             values={formValues}
-            disabled={disabled}
             handleChange={handleChange}
             handleSubmit={handleSubmit}
           />
