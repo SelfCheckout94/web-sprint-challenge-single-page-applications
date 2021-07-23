@@ -66,14 +66,17 @@ const App = () => {
           <Link to="/pizza-form">Place Order</Link>
         </div>
       </nav>
-
-      <Form
-        id="pizza-form"
-        values={formValues}
-        disabled={disabled}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      />
+      <Switch>
+        <Route path="/pizza-form">
+          <Form
+            id="pizza-form"
+            values={formValues}
+            disabled={disabled}
+            handleChange={handleChange}
+            handleSubmit={handleSubmit}
+          />
+        </Route>
+      </Switch>
     </>
   );
 };
