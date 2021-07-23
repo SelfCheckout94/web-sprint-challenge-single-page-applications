@@ -1,10 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 
+import Form from "./components/Form";
+
+const initialFormValues = {
+  name: "",
+  size: "",
+  topping1: false,
+  topping2: false,
+  special: "",
+};
+
+const initialDisabled = true;
 const App = () => {
+  const [formValues, setFormValues] = useState(initialFormValues);
+  const [disabled, setDisabled] = useState(initialDisabled);
+
+  const handleChange = (name, value) => {
+    setFormValues({ ...formValues, [name]: value });
+  };
+
   return (
     <>
-      <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
+      <Form
+        id="pizza-form"
+        values={formValues}
+        disabled={disabled}
+        handleChange={handleChange}
+      />
     </>
   );
 };
