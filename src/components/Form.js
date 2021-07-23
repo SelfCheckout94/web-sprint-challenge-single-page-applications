@@ -14,7 +14,7 @@ export default function Form(props) {
   };
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} id="pizza-form">
       <h2>Pizza Maker</h2>
       <div>
         <h3>Input your name</h3>

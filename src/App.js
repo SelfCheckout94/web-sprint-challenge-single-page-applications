@@ -71,7 +71,6 @@ const App = () => {
       <Switch>
         <Route path="/pizza">
           <Form
-            id="pizza-form"
             values={formValues}
             disabled={disabled}
             handleChange={handleChange}
