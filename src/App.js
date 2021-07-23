@@ -63,11 +63,13 @@ const App = () => {
         <h1>Lambda Eats</h1>
         <div>
           <Link to="/">Home</Link>
-          <Link to="/pizza-form">Place Order</Link>
+          <Link to="/pizza" id="order-pizza">
+            Place Order
+          </Link>
         </div>
       </nav>
       <Switch>
-        <Route path="/pizza-form">
+        <Route path="/pizza">
           <Form
             id="pizza-form"
             values={formValues}
