@@ -1,17 +1,20 @@
 import React from "react";
 
 export default function Form(props) {
-  const { values, disabled, handleChange } = props;
+  const { values, disabled, handleChange, handleSubmit } = props;
   const onChange = (e) => {
     const { name, value, type, checked } = e.target;
     const valueToUse = type === "checkbox" ? checked : value;
     handleChange(name, valueToUse);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = (e) => {
+    e.preventDefault();
+    handleSubmit();
+  };
 
   return (
-    <div>
+    <form onSubmit={onSubmit}>
       <h2>Pizza Maker</h2>
       <div>
         <h3>Input your name</h3>
@@ -26,7 +29,7 @@ export default function Form(props) {
       <div>
         <label>
           <h3>Select your size:</h3>
-          <select name="size" id="size-dropdown">
+          <select name="size" id="size-dropdown" onChange={onChange}>
             <option value="">-- Click Me --</option>
             <option value="Small">Small</option>
             <option value="Medium">Medium</option>
@@ -44,7 +47,7 @@ export default function Form(props) {
             type="radio"
             value="original red"
             onChange={onChange}
-            checked={values.topping1 === "original red"}
+            checked={values.sauce === "original red"}
           />
         </label>
         <label>
@@ -54,7 +57,7 @@ export default function Form(props) {
             type="radio"
             value="garlic ranch"
             onChange={onChange}
-            checked={values.topping1 === "garlic ranch"}
+            checked={values.sauce === "garlic ranch"}
           />
         </label>
         <label>
@@ -64,7 +67,7 @@ export default function Form(props) {
             type="radio"
             value="bbq sauce"
             onChange={onChange}
-            checked={values.topping1 === "bbq sauce"}
+            checked={values.sauce === "bbq sauce"}
           />
         </label>
         <label>
@@ -74,7 +77,7 @@ export default function Form(props) {
             type="radio"
             value="spinach alfredo"
             onChange={onChange}
-            checked={values.topping1 === "spinach alfredo"}
+            checked={values.sauce === "spinach alfredo"}
           />
         </label>
       </div>
@@ -86,7 +89,7 @@ export default function Form(props) {
             name="pepperoni"
             type="checkbox"
             onChange={onChange}
-            checked={values.topping2}
+            checked={values.pepperoni}
           />
         </label>
         <label>
@@ -95,7 +98,7 @@ export default function Form(props) {
             name="sausage"
             type="checkbox"
             onChange={onChange}
-            checked={values.topping2}
+            checked={values.sausage}
           />
         </label>
         <label>
@@ -104,106 +107,16 @@ export default function Form(props) {
             name="bacon"
             type="checkbox"
             onChange={onChange}
-            checked={values.topping2}
+            checked={values.bacon}
           />
         </label>
         <label>
           Spicy Sausage
           <input
-            name="spicy sausage"
+            name="spicySausage"
             type="checkbox"
             onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Grilled Chicken
-          <input
-            name="grilled chicken"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Onions
-          <input
-            name="onions"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Green Pepper
-          <input
-            name="green pepper"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Diced Tomatos
-          <input
-            name="diced tomatos"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Black Olives
-          <input
-            name="black olives"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Roasted Garlic
-          <input
-            name="roasted garlic"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Artichoke Hearts
-          <input
-            name="artichoke hearts"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Three Cheese
-          <input
-            name="three cheese"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Pineapple
-          <input
-            name="pineapple"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
-          />
-        </label>
-        <label>
-          Extra Cheese
-          <input
-            name="extra cheese"
-            type="checkbox"
-            onChange={onChange}
-            checked={values.topping2}
+            checked={values.spicySausage}
           />
         </label>
       </div>
@@ -219,10 +132,8 @@ export default function Form(props) {
         />
       </div>
       <div>
-        <button disabled={disabled} id="order-button">
-          Add to Order
-        </button>
+        <button id="order-button">Add to Order</button>
       </div>
-    </div>
+    </form>
   );
 }
