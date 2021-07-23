@@ -33,6 +33,7 @@ const App = () => {
       .post("https://reqres.in/api/orders", newOrder)
       .then((res) => {
         setOrders([res.data, ...orders]);
+        console.log(res);
       })
       .catch((err) => console.error(err))
       .finally(setFormValues(initialFormValues));
@@ -54,13 +55,12 @@ const App = () => {
     const newOrder = {
       name: formValues.name.trim(),
       size: formValues.size,
-      sauce: formValues.sauce,
-      toppings: ["pepperoni", "sausage", "bacon", "spicySausage"].filter(
-        (topping) => formValues[topping]
-      ),
+      sausage: formValues.sausage,
+      bacon: formValues.bacon,
+      spicySausage: formValues.spicySausage,
+      pepperoni: formValues.pepperoni,
     };
     postNewOrder(newOrder);
-    console.log(orders);
   };
 
   return (
